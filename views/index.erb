@@ -1,0 +1,93 @@
+<div class="contain-to-grid">
+  <nav class="top-bar">
+    <ul class="title-area">
+      <!-- Title Area -->
+      <li class="name"></li>
+      <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+      <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+    </ul>
+
+    <section class="top-bar-section">
+      <!-- Left Nav Section -->
+      <ul class="right">
+      </ul>
+    </section>
+  </nav>
+</div>
+
+<div class="row">
+  <div class="large-12 columns">
+    <h2>Welcome to Anagram Sleuth</h2>
+    <p>A simple site to generate list of anagrams from given words.</p>
+  </div>
+<div>
+
+<div class="row">
+  <div class="small-10 small-offset-1 columns">
+    <div class="row collapse">
+      <form onsubmit="doSearch();">
+        <div class="small-10 columns">
+          <input id="words" type="text" placeholder="Enter words and press enter" />
+        </div>
+        <div class="small-2 columns">
+          <input class="button postfix" type="submit" />
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="large-12 columns">
+    <h3 id="rtitle">Results:</h3>
+    <div id="results" class="large-12 columns">
+      <table>
+        <thead>
+          <tr>
+            <th>Word</th>
+            <th>Length</th>
+          </tr>
+        </thead>
+        <tbody id="res-body">
+          <tr>
+            <td colspan=2>
+              No results yet - try entering some words above!
+            </td>
+          </tr>
+        </tbody>
+      <table>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+
+  function doSearch() {
+
+    if (event.preventDefault) {
+      event.preventDefault();
+    }
+
+    $('table').tablesorter();
+
+    var tBody = $('#res-body');
+    tBody.html('<tr><td colspan=2>Working...</td></tr>');
+
+    $.post('/sleuth/' + $('#words').val(), {}, function(data, status, xhr) {
+      tBody.empty();
+      var words = data.split('\n');
+      $("#rtitle").html('Results (' + words.length + '):');
+      for (var i in words) {
+        var s = words[i];
+        if (s) {
+          tBody.append('<tr><td>'+s+'</td><td>'+s.length+'</td></tr>');
+        }
+      };
+
+      // let the plugin know that we made a update
+      $("table").trigger("update");
+    });
+
+    return false;
+  };
+</script>
