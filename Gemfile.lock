@@ -50,6 +50,7 @@ DEPENDENCIES
   compass
   foreman
   sinatra (>= 1.0)
+  sinatra-contrib (>= 1.0)
   sinatra-reloader (> 0)
   unicorn
   zurb-foundation
