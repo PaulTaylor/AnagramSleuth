@@ -16,7 +16,7 @@ end
 
 # Actual Work
 post '/sleuth/:in_words' do
-  in_words = params[:in_words].gsub(/\s/, '')
+  in_words = params[:in_words].gsub(/\s/, '').downcase!
   min_word_length = [params[:min].to_i, 3].max
 
   # First test - regex test to determine if candidate word only uses letters we have
