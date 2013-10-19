@@ -1,3 +1,3 @@
-### Foundation 4 + Sinatra + Heroku
----
-Simple and easy beginning framework for Heroku hosted sites. Foundation is baked in because I was experiencing anomolies with the zurb-foundation gem.
+### Anagram Sleuth
+
+Simple webapp to generate anagrams.   A published version is at http://anagramsleuth.heroku.com.
