@@ -21,15 +21,15 @@ GEM
     foreman (0.77.0)
       dotenv (~> 1.0.2)
       thor (~> 0.19.1)
-    kgio (2.9.3)
     multi_json (1.10.1)
     newrelic_rpm (3.11.2.286)
+    puma (2.11.2)
+      rack (>= 1.1, < 2.0)
     rack (1.6.0)
     rack-protection (1.5.3)
       rack
     rack-test (0.6.3)
       rack (>= 1.0)
-    raindrops (0.13.0)
     rb-fsevent (0.9.4)
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
@@ -49,10 +49,6 @@ GEM
       sinatra-contrib
     thor (0.19.1)
     tilt (1.4.1)
-    unicorn (4.8.3)
-      kgio (~> 2.6)
-      rack
-      raindrops (~> 0.7)
     zurb-foundation (4.3.2)
       sass (>= 3.2.0)
 
@@ -64,8 +60,8 @@ DEPENDENCIES
   eventmachine (>= 1.0.4)
   foreman
   newrelic_rpm
+  puma
   sinatra (>= 1.0)
   sinatra-contrib (>= 1.0)
   sinatra-reloader (> 0)
-  unicorn
   zurb-foundation

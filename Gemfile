@@ -5,7 +5,7 @@ ruby '2.2.2'
 gem 'newrelic_rpm'
 
 gem 'eventmachine', '>=1.0.4'
-gem 'unicorn'
+gem 'puma'
 gem "sinatra" ,'>=1.0'
 gem "sinatra-contrib" ,'>=1.0'
 
