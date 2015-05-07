@@ -1,6 +1,8 @@
 source 'http://rubygems.org'
 
-ruby '2.2.0'
+ruby '2.2.2'
+
+gem 'newrelic_rpm'
 
 gem 'eventmachine', '>=1.0.4'
 gem 'unicorn'
