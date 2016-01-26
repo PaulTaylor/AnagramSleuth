@@ -27,7 +27,10 @@
     <div class="row collapse">
       <form onsubmit="doSearch();">
         <div class="small-10 columns">
-          <input id="words" type="text" placeholder="Enter words and press enter" />
+          <input id="numbers" type="text" placeholder="Enter comma separated numbers" />
+        </div>
+        <div class="small-10 columns">
+          <input id="target" type="text" placeholder="Enter target press enter" />
         </div>
         <div class="small-2 columns">
           <input class="button postfix" type="submit" />
@@ -41,21 +44,7 @@
   <div class="large-12 columns">
     <h3 id="rtitle">Results:</h3>
     <div id="results" class="large-12 columns">
-      <table>
-        <thead>
-          <tr>
-            <th>Word</th>
-            <th>Length</th>
-          </tr>
-        </thead>
-        <tbody id="res-body">
-          <tr>
-            <td colspan=2>
-              No results yet - try entering some words above!
-            </td>
-          </tr>
-        </tbody>
-      <table>
+      No answer yet!
     </div>
   </div>
 </div>
@@ -70,22 +59,11 @@
 
     $('table').tablesorter();
 
-    var tBody = $('#res-body');
-    tBody.html('<tr><td colspan=2>Working...</td></tr>');
+    var tBody = $('#results');
+    tBody.html('Working...');
 
-    $.post('/sleuth/' + $('#words').val(), {}, function(data, status, xhr) {
-      tBody.empty();
-      var words = data.split('\n');
-      $("#rtitle").html('Results (' + words.length + '):');
-      for (var i in words) {
-        var s = words[i];
-        if (s) {
-          tBody.append('<tr><td>'+s+'</td><td>'+s.length+'</td></tr>');
-        }
-      };
-
-      // let the plugin know that we made a update
-      $("table").trigger("update");
+    $.post('/sleuth/' + $('#numbers').val() +'/' + $('#target').val(), {}, function(data) {
+      tBody.html(data);
     });
 
     return false;
