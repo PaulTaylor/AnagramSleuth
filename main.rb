@@ -13,6 +13,11 @@ require 'zlib'
 
 WORDLIST_FILE = './wordlist.gz'
 
+# www.gnuterrypratchett.com
+after do
+  response.headers['X-Clacks-Overhead'] = "GNU Terry Pratchett"
+end
+
 # Index route
 get '/' do
   erb :index
