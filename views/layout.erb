@@ -1,51 +1,40 @@
 <!DOCTYPE html>
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang="en"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Anagram Sleuth</title>
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width" />
-  <title>Anagram Sleuth</title>
+    <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
 
-  <link rel="stylesheet" href="stylesheets/normalize.css" />
-  <link rel="stylesheet" href="stylesheets/app.css" />
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
-  <script src="javascripts/vendor/custom.modernizr.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 
-  <script type="text/javascript" src="//use.typekit.net/mxf4zfx.js"></script>
-  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-</head>
-<body>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
-  <%=yield%>
-
-  <script>
-  document.write('<script src=' +
-  ('__proto__' in {} ? 'javascripts/vendor/zepto' : 'javascripts/vendor/jquery') +
-  '.js><\/script>')
-  </script>
-
-  <script src="javascripts/foundation/foundation.js"></script>
-  <script src="javascripts/foundation/foundation.alerts.js"></script>
-  <script src="javascripts/foundation/foundation.clearing.js"></script>
-  <script src="javascripts/foundation/foundation.cookie.js"></script>
-  <script src="javascripts/foundation/foundation.dropdown.js"></script>
-  <script src="javascripts/foundation/foundation.forms.js"></script>
-  <script src="javascripts/foundation/foundation.joyride.js"></script>
-  <script src="javascripts/foundation/foundation.magellan.js"></script>
-  <script src="javascripts/foundation/foundation.orbit.js"></script>
-  <script src="javascripts/foundation/foundation.placeholder.js"></script>
-  <script src="javascripts/foundation/foundation.reveal.js"></script>
-  <script src="javascripts/foundation/foundation.section.js"></script>
-  <script src="javascripts/foundation/foundation.tooltips.js"></script>
-  <script src="javascripts/foundation/foundation.topbar.js"></script>
-
-
-  <script>
-    $(document).foundation();
-  </script>
-  <script src="javascripts/jquery.tablesorter.min.js"></script>
-
-</body>
+    <link rel="stylesheet" href="/css/app.css">
+  </head>
+  <body class="container">
+    <header class="container">
+      <nav class="navbar navbar-default navbar-fixed-top">
+        <a class="navbar-brand" href="/">Anagram Sleuth</a>
+        <div class="container"></div>
+      </nav>
+    </div>
+    <%= yield %>
+    <hr>
+    <footer>
+      <nav class="navbar navbar-default navbar-fixed-bottom">
+        <a class="navbar-brand" href="/">Anagram Sleuth</a>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="https://github.com/PaulTaylor/AnagramSleuth">See the Code on Github!</a></li>
+          <li role="separator" class="divider" style="width: 10px"></li>
+        </ul>
+      </nav>
+    </footer>
+  </body>
 </html>

@@ -1,93 +1,61 @@
-<div class="contain-to-grid">
-  <nav class="top-bar">
-    <ul class="title-area">
-      <!-- Title Area -->
-      <li class="name"></li>
-      <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
-      <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
-    </ul>
-
-    <section class="top-bar-section">
-      <!-- Left Nav Section -->
-      <ul class="right">
-      </ul>
-    </section>
-  </nav>
-</div>
-
-<header class="row">
-  <div class="large-12 columns">
-    <h2>Welcome to Anagram Sleuth</h2>
-    <p>A simple site to generate list of anagrams from given words.</p>
-  </div>
+<header class="col-md-12">
+  <h1>Welcome to Anagram Sleuth</h1>
+  <p>A simple way to site to generate list of anagrams from given words or letters.</p>
 </header>
 
-<article class="row">
-  <div class="small-10 small-offset-1 columns">
-    <div class="row collapse">
-      <form onsubmit="doSearch();">
-        <div class="small-10 columns">
-          <input id="words" type="text" placeholder="Enter words and press enter" />
-        </div>
-        <div class="small-2 columns">
-          <input class="button postfix" type="submit" />
-        </div>
-      </form>
+<article id="words_group" class="col-md-12">
+  <h3>Words or Letters</h3>
+  <p>You can enter letters or set of words here and I'll return all the words that I know of that are contained within</p>
+  <form onsubmit="return doWordSearch()" class="form-horizontal">
+    <div id="word_alert" class="alert alert-danger col-sm-12 hidden">
+      <span class="glyphicon glyphicon-alert" style="padding-right: 1em"></span>
+      <span id="word_alert_msg">Some error text</span>
     </div>
-  </div>
+    <div id="words_form_group" class="form-group">
+      <label class="col-sm-2 control-label" for="words">Source String:</label>
+      <div class="col-sm-10">
+        <input class="form-control" id="words" type="text" placeholder="eg. Anagram" class="form-control"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </form>
 </article>
 
-<div class="row">
-  <div class="large-12 columns">
-    <h3 id="rtitle">Results:</h3>
-    <div id="results" class="large-12 columns">
-      <table>
-        <thead>
-          <tr>
-            <th>Word</th>
-            <th>Length</th>
-          </tr>
-        </thead>
-        <tbody id="res-body">
-          <tr>
-            <td colspan=2>
-              No results yet - try entering some words above!
-            </td>
-          </tr>
-        </tbody>
-      <table>
+<article id="numbers_group" class="col-md-12">
+  <h3>Countdown Style Numbers Game</h3>
+  <p>
+    Enter a series of numbers here and I'll try and come up with a formula that'll use basic numeric operations (+,-,&times;,&divide;) to combine the source numbers and produce the target.  For example, as per the numbers game in countdown.
+  </p>
+  <p>
+    The source numbers and the target number must be integer values.
+  </p>
+  <form onsubmit="return doNumbers()" class="form-horizontal">
+    <div id="number_alert" class="alert alert-danger col-sm-12 hidden">
+      <span class="glyphicon glyphicon-alert" style="padding-right: 1em"></span>
+      <span id="number_alert_msg">Some error text</span>
     </div>
-  </div>
-</div>
+    <div id="numsrc_form_group" class="form-group">
+      <label class="col-sm-2 control-label" for="words">Source Numbers:</label>
+      <div class="col-sm-10">
+        <input class="form-control" id="numbers" type="text" placeholder="eg. 1,2,3,4,5,6" class="form-control"/>
+      </div>
+    </div>
+    <div id="target_form_group" class="form-group">
+      <label class="col-sm-2 control-label" for="words">Target:</label>
+      <div class="col-sm-10">
+        <input class="form-control" id="target" type="text" placeholder="eg. 123" class="form-control"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-1">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </form>
+</article>
 
-<script type="text/javascript">
-
-  function doSearch() {
-
-    if (event.preventDefault) {
-      event.preventDefault();
-    }
-
-    $('table').tablesorter();
-
-    var tBody = $('#res-body');
-    tBody.html('<tr><td colspan=2>Working...</td></tr>');
-
-    $.post('/sleuth/' + $('#words').val(), {}, function(data, status, xhr) {
-      tBody.empty();
-      var words = data.split('\n');
-      $("#rtitle").html('Results (' + words.length + '):');
-      for (var i in words) {
-        var s = words[i];
-        if (s) {
-          tBody.append('<tr><td>'+s+'</td><td>'+s.length+'</td></tr>');
-        }
-      };
-
-      // let the plugin know that we made a update
-      $("table").trigger("update");
-    });
-
-    return false;
-  };
-</script>
+<script type="text/javascript" src="/js/index.js"></script>

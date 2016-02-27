@@ -1,36 +1,59 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    addressable (2.4.0)
     backports (3.6.7)
-    chunky_png (1.3.5)
-    compass (1.0.3)
-      chunky_png (~> 1.2)
-      compass-core (~> 1.0.2)
-      compass-import-once (~> 1.0.5)
-      rb-fsevent (>= 0.9.3)
-      rb-inotify (>= 0.9)
-      sass (>= 3.3.13, < 3.5)
-    compass-core (1.0.3)
-      multi_json (~> 1.0)
-      sass (>= 3.3.0, < 3.5)
-    compass-import-once (1.0.5)
-      sass (>= 3.2, < 3.5)
+    builder (3.2.2)
+    capybara (2.6.2)
+      addressable
+      mime-types (>= 1.16)
+      nokogiri (>= 1.3.3)
+      rack (>= 1.0.0)
+      rack-test (>= 0.5.4)
+      xpath (~> 2.0)
+    cliver (0.3.2)
+    cucumber (2.3.2)
+      builder (>= 2.1.2)
+      cucumber-core (~> 1.4.0)
+      cucumber-wire (~> 0.0.1)
+      diff-lcs (>= 1.1.3)
+      gherkin (~> 3.2.0)
+      multi_json (>= 1.7.5, < 2.0)
+      multi_test (>= 0.1.2)
+    cucumber-core (1.4.0)
+      gherkin (~> 3.2.0)
+    cucumber-wire (0.0.1)
+    diff-lcs (1.2.5)
     eventmachine (1.0.9.1)
-    ffi (1.9.10)
     foreman (0.78.0)
       thor (~> 0.19.1)
+    gherkin (3.2.0)
+    mime-types (3.0)
+      mime-types-data (~> 3.2015)
+    mime-types-data (3.2016.0221)
+    mini_portile2 (2.0.0)
     multi_json (1.11.2)
+    multi_test (0.1.2)
     newrelic_rpm (3.14.2.312)
+    nokogiri (1.6.7.2)
+      mini_portile2 (~> 2.0.0.rc2)
+    nokogiri (1.6.7.2-x64-mingw32)
+      mini_portile2 (~> 2.0.0.rc2)
+    poltergeist (1.9.0)
+      capybara (~> 2.1)
+      cliver (~> 0.3.1)
+      multi_json (~> 1.0)
+      websocket-driver (>= 0.2.0)
     puma (2.15.3)
     rack (1.6.4)
     rack-protection (1.5.3)
       rack
     rack-test (0.6.3)
       rack (>= 1.0)
-    rb-fsevent (0.9.7)
-    rb-inotify (0.9.5)
-      ffi (>= 0.5.0)
-    sass (3.4.21)
+    rspec-expectations (3.4.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.4.0)
+    rspec-support (3.4.1)
     sinatra (1.4.7)
       rack (~> 1.5)
       rack-protection (~> 1.4)
@@ -46,22 +69,28 @@ GEM
       sinatra-contrib
     thor (0.19.1)
     tilt (2.0.2)
-    zurb-foundation (4.3.2)
-      sass (>= 3.2.0)
+    websocket-driver (0.6.3)
+      websocket-extensions (>= 0.1.0)
+    websocket-extensions (0.1.2)
+    xpath (2.0.0)
+      nokogiri (~> 1.3)
 
 PLATFORMS
   ruby
+  x64-mingw32
 
 DEPENDENCIES
-  compass
+  capybara
+  cucumber
   eventmachine (>= 1.0.4)
   foreman
   newrelic_rpm
+  poltergeist
   puma
+  rspec-expectations
   sinatra (>= 1.0)
   sinatra-contrib (>= 1.0)
   sinatra-reloader (> 0)
-  zurb-foundation
 
 BUNDLED WITH
    1.11.2
