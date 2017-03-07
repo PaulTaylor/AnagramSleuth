@@ -11,6 +11,8 @@ end
 require 'open-uri'
 require 'zlib'
 
+require './lib/numbers_game.rb'
+
 WORDLIST_FILE = './wordlist.gz'
 
 # www.gnuterrypratchett.com
@@ -35,50 +37,12 @@ get '/sleuth/:numbers/:target' do
     x.to_i
   end
   target = params[:target].to_i
-
   operators = [ '+', '-', '*', '/']
 
-  # Generate possible formulae
-  last_round = in_nums.collect { |x| x.to_s }
-  (2..in_nums.size).each do |idx|
-    this_round = []
-    last_round.each do |stem|
-      # Add each possible combination of op and number to the end of the last round
-      # Is this a new number that isn't currently in the formula?
-      this_iter_nums = in_nums.clone
-      form_nums = stem.split(/[\(\)+*\/-]/)
-      form_nums.each do |s_fn|
-        fn = s_fn.to_i
-        next if fn == 0
-        idx = this_iter_nums.index(fn)
-        this_iter_nums.delete_at(idx) if idx
-      end
+  result = NumbersGame.new(in_nums, target, operators).run
+  formula = result.text unless result.nil?
 
-      # this_iter_nums now contains the remaining numbers
-      this_iter_nums.each do |new_num|
-        operators.each do |op|
-          formula = "(#{stem}#{op}#{new_num})"
-          eval_f = formula.gsub(/([0-9]+)/, '\1.0')
-          # No point doing more if we've hit the target
-          # gsub forces arithmetic into float mode so we can detect non-integer arithmetic
-          res = eval(eval_f)
-          if res % 1 != 0 or res < 1 then
-            # Decimal values cannot continue - only integers
-            next
-          elsif res == target.to_f then
-            # Render the result template
-            return erb :numbers, :locals => { :formula => formula, :time => (Time.now - start) }
-          else
-            this_round << formula
-          end
-        end
-      end
-      # add to to_check
-      last_round = this_round
-    end
-  end
-
-  return erb :numbers, :locals => { :formula => nil, :time => (Time.now - start) }
+  return erb :numbers, :locals => { :formula => formula, :time => (Time.now - start) }
 end
 
 # Letters round

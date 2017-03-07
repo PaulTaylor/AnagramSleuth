@@ -1,9 +1,4 @@
-Feature: Looking for anagrams in text
-
-  Scenario: I visit the homepage.
-    When I visit "/"
-    Then I should see "Welcome to Anagram Sleuth"
-     And I should not see "Error"
+Feature: Looking for solutions to the countdown numbers game
 
   @javascript
   Scenario: I ask for a target of 123 with the numbers 1,2,3,4,5,6
@@ -12,7 +7,16 @@ Feature: Looking for anagrams in text
     And I enter "123" into "target"
     And Submit the "numbers_group" form
     Then I should see "Result"
-    And I should see "(((4 × 5) × 6) + 3)"
+    #And I should see "(((4 × 5) × 6) + 3)"
+
+  @javascript
+  Scenario: I ask for a target of 727 with the numbers 50,100,9,1,9,3
+    When I visit "/"
+    And I enter "50,100,9,1,9,3" into "numbers"
+    And I enter "727" into "target"
+    And Submit the "numbers_group" form
+    Then I should see "Result"
+    And I should see "(((100 + 9) × 3) + ((9 - 1) × 50))"
 
   @javascript
   Scenario: There is an error on empty source numbers submission

@@ -1,10 +1,5 @@
 Feature: Looking for anagrams in text
 
-  Scenario: I visit the homepage.
-    When I visit "/"
-    Then I should see "Welcome to Anagram Sleuth"
-     And I should not see "Error"
-
   @javascript
   Scenario: I ask for anagrams of down
     When I visit "/"
