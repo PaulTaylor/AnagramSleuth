@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.2.3'
+ruby '2.4.0'
 
 gem 'newrelic_rpm'
 
@@ -12,6 +12,7 @@ gem "sinatra-contrib" ,'>=1.0'
 group :development do
   gem "sinatra-reloader", '>0'
   gem 'foreman'
+  gem 'ruby-prof'
 end
 
 group :test do
