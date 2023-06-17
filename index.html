@@ -1,0 +1,26 @@
+<html lang="en">
+
+<body>
+    <script type="module">
+        // Use ES module import syntax to import functionality from the module
+        // that we have compiled.
+        //
+        // Note that the `default` import is an initialization function which
+        // will "boot" the module and make it ready to use. Currently browsers
+        // don't support natively imported WebAssembly as an ES module, but
+        // eventually the manual initialization won't be required!
+        import init, { letters } from '/pkg/anagram_sleuth.js';
+
+        async function run() {
+            await init();
+
+            // And afterwards we can use all the functionality defined in wasm.
+            const result = letters();
+            console.log(`1 + 2 = ${result}`);
+        }
+
+        run();
+    </script>
+</body>
+
+</html>
