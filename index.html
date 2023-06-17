@@ -1,4 +1,10 @@
+<!DOCTYPE html>
 <html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
 
 <body>
     <script type="module">
@@ -9,18 +15,172 @@
         // will "boot" the module and make it ready to use. Currently browsers
         // don't support natively imported WebAssembly as an ES module, but
         // eventually the manual initialization won't be required!
-        import init, { letters } from '/pkg/anagram_sleuth.js';
+        import init, { letters, numbers } from '/pkg/anagram_sleuth.js';
 
         async function run() {
             await init();
 
-            // And afterwards we can use all the functionality defined in wasm.
-            const result = letters();
-            console.log(`1 + 2 = ${result}`);
+            // Download the wordlist into memory - should probably do better with this
+            const td = new TextDecoder();
+            const chunks = [];
+            const ds = new DecompressionStream("gzip");
+            let wlgz = await fetch("/wordlist.gz");
+            for await (const chunk of wlgz.body.pipeThrough(ds)) {
+                chunks.push(...chunk)
+            }
+            let wl = td.decode(new Uint8Array(chunks))
+
+            function wordSorter(a, b) {
+                let r = b.length - a.length;
+                if (r === 0) {
+                    if (b > a) {
+                        return 1
+                    } else if (a > b) {
+                        return -1
+                    } else {
+                        return 0
+                    }
+                }
+                return r;
+            }
+
+            // Define some funcs that can be used to call the rust functionality from
+            // outside this module block
+            window.bootLetters = function (event) {
+                event.preventDefault();
+                const inp = document.getElementById("letters-inp").value;
+                const minl = document.getElementById("minl").value
+                const maxRes = document.getElementById("maxRes").value
+                const result = letters(inp, wl, minl);
+                if (result) {
+                    let words = result.split(",");
+                    words.sort(wordSorter);
+                    document.getElementById('result-list').innerHTML = ''
+                    for (const word of words.slice(0, maxRes)) {
+                        document.getElementById('result-list').innerHTML += `<li>${word}</li>`
+                    }
+                } else {
+                    document.getElementById('result-list').innerHTML = "Sorry - nothing was found :("
+                }
+            };
+
+            window.bootNumbers = function (event) {
+                event.preventDefault();
+                const inp = document.getElementById("numbers-inp").value;
+                const target = document.getElementById("numbers-target").value;
+                const ops = "/*+-"
+                const result = numbers(inp, target, ops)
+                if (result) {
+                    document.getElementById("numbers-result").innerHTML = `<pre>${result}</pre>`;
+                } else {
+                    document.getElementById("numbers-result").innerHTML = "No result found :("
+                }
+            };
         }
 
         run();
     </script>
+
+    <header class="section">
+        <div class="container">
+            <h1 class="title">
+                Anagram Sleuth
+            </h1>
+            <p class="subtitle">
+                A Simple Countdown Solver
+            </p>
+        </div>
+    </header>
+
+    <section class="section">
+        <h1 class="title">Letters</h1>
+        <p class="subtitle">Enter your letters and desired minimum length. <br><small>A maximum of 10 words will be
+                returned.</small></p>
+
+        <div class="columns">
+            <div class="column" height=100%>
+                <div class="box">
+                    <form onsubmit="return bootLetters(event)">
+                        <div class="field">
+                            <label class="label">Input Letters</label>
+                            <div class="control">
+                                <input id="letters-inp" class="input" type="text" placeholder="abcdefg" minlength=3
+                                    maxlength=15>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">Minimum Length to Consider</label>
+                            <div class="control">
+                                <input id="minl" class="input" type="number" min="3" value="4">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">Maximum Number of Results</label>
+                            <div class="control">
+                                <input id="maxRes" class="input" type="number" min="3" value="4">
+                            </div>
+                        </div>
+                        <input class="button is-success" type="submit" value="Go">
+                        <input class="button is-danger" type="reset" value="Clear">
+                    </form>
+                </div>
+            </div>
+            <div class="column content">
+                <p class="subtitle">Result:</p>
+                <ul id="result-list">
+                    <p>Results will appear here</p>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="section content">
+        <h1 class="title">Numbers</h1>
+        <p class="subtitle">Enter your input numbers (separated by commas) and your target</p>
+
+        <div class="columns">
+            <div class="column" height=100%>
+                <div class="box">
+                    <form onsubmit="return bootNumbers(event)">
+                        <div class="field">
+                            <label class="label">Input Numbers (comma separated)</label>
+                            <div class="control">
+                                <input id="numbers-inp" class="input" type="text" placeholder="1,2,3,4,5,6" minlength=3
+                                    maxlength=15>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">Target</label>
+                            <div class="control">
+                                <input id="numbers-target" class="input" type="number" min="1" max="999"
+                                    placeholder="123">
+                            </div>
+                        </div>
+                        <input class="button is-success" type="submit" value="Go">
+                        <input class="button is-danger" type="reset" value="Clear">
+                    </form>
+                </div>
+            </div>
+            <div class="column content">
+                <p class="subtitle">Result:</p>
+                <div id="numbers-result">
+                    The result will appear here
+                </div>
+            </div>
+    </section>
+
+    <footer class="footer">
+        <div class="content has-text-centered">
+            <p>Built using <a href="https://www.rust-lang.org/what/wasm">Rust</a>, <a
+                    href="https://rustwasm.github.io/wasm-pack/">wasm-pack</a>, the <a
+                    href="https://github.com/cracklib/cracklib">Cracklib wordlist</a>, and <a
+                    href="https://bulma.io">Bulma.</a></p>
+            <p>
+                <a href="https://github.com/PaulTaylor/AnagramSleuth">Source Code</a> |
+                Hosted on <a href="https://pages.cloudflare.com/">Cloudflare Pages.</a>
+            </p>
+        </div>
+    </footer>
 </body>
 
 </html>

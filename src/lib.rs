@@ -10,8 +10,9 @@ use wasm_bindgen::prelude::wasm_bindgen;
 #[wasm_bindgen]
 #[must_use]
 pub fn letters(input: &str, wordlist: &str, min_word_length: usize) -> String {
+    let letters = Regex::new("[^a-z]").unwrap();
     let downcased = input.to_ascii_lowercase();
-    let cleaned = downcased.trim();
+    let cleaned = letters.replace_all(downcased.trim(), "");
 
     let mut in_counts = HashMap::new();
     for c in cleaned.chars() {
