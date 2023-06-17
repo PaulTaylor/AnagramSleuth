@@ -3,7 +3,9 @@
 
 <head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>🔎 Anagram Sleuth</title>
 </head>
 
 <body>
@@ -55,10 +57,12 @@
                 if (result) {
                     let words = result.split(",");
                     words.sort(wordSorter);
-                    document.getElementById('result-list').innerHTML = ''
+                    let resultHtml = '<ul>'
                     for (const word of words.slice(0, maxRes)) {
-                        document.getElementById('result-list').innerHTML += `<li>${word}</li>`
+                        resultHtml += `<li>${word}</li>`
                     }
+                    resultHtml += '</ul>'
+                    document.getElementById('result-list').innerHTML = resultHtml
                 } else {
                     document.getElementById('result-list').innerHTML = "Sorry - nothing was found :("
                 }
@@ -84,7 +88,7 @@
     <header class="section">
         <div class="container">
             <h1 class="title">
-                Anagram Sleuth
+                Anagram Sleuth 🔎
             </h1>
             <p class="subtitle">
                 A Simple Countdown Solver
@@ -127,11 +131,10 @@
             </div>
             <div class="column content">
                 <p class="subtitle">Result:</p>
-                <ul id="result-list">
-                    <p>Results will appear here</p>
-                </ul>
+                <div id="result-list">
+                    Results will appear here
+                </div>
             </div>
-        </div>
     </section>
 
     <section class="section content">
