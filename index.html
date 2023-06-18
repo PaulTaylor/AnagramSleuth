@@ -85,92 +85,95 @@
         run();
     </script>
 
-    <header class="section">
-        <div class="container">
-            <h1 class="title">
-                Anagram Sleuth 🔎
-            </h1>
-            <p class="subtitle">
-                A Simple Countdown Solver
-            </p>
-        </div>
-    </header>
+    <div class="container is-max-desktop">
 
-    <section class="section">
-        <h1 class="title">Letters</h1>
-        <p class="subtitle">Enter your letters and desired minimum length. <br><small>A maximum of 10 words will be
-                returned.</small></p>
+        <header class="section">
+            <div class="container">
+                <h1 class="title">
+                    Anagram Sleuth 🔎
+                </h1>
+                <p class="subtitle">
+                    A Simple Countdown Solver
+                </p>
+            </div>
+        </header>
 
-        <div class="columns">
-            <div class="column" height=100%>
-                <div class="box">
-                    <form onsubmit="return bootLetters(event)">
-                        <div class="field">
-                            <label class="label">Input Letters</label>
-                            <div class="control">
-                                <input id="letters-inp" class="input" type="text" placeholder="abcdefg" minlength=3
-                                    maxlength=15>
-                            </div>
-                        </div>
-                        <div class="field">
-                            <label class="label">Minimum Length to Consider</label>
-                            <div class="control">
-                                <input id="minl" class="input" type="number" min="3" value="4">
-                            </div>
-                        </div>
-                        <div class="field">
-                            <label class="label">Maximum Number of Results</label>
-                            <div class="control">
-                                <input id="maxRes" class="input" type="number" min="3" value="4">
-                            </div>
-                        </div>
-                        <input class="button is-success" type="submit" value="Go">
-                        <input class="button is-danger" type="reset" value="Clear">
-                    </form>
-                </div>
-            </div>
-            <div class="column content">
-                <p class="subtitle">Result:</p>
-                <div id="result-list">
-                    Results will appear here
-                </div>
-            </div>
-    </section>
+        <section class="section">
+            <h1 class="title">Letters</h1>
+            <p class="subtitle">Enter your letters and desired minimum length. <br><small>A maximum of 10 words will be
+                    returned.</small></p>
 
-    <section class="section content">
-        <h1 class="title">Numbers</h1>
-        <p class="subtitle">Enter your input numbers (separated by commas) and your target</p>
+            <div class="columns">
+                <div class="column" height=100%>
+                    <div class="box">
+                        <form onsubmit="return bootLetters(event)">
+                            <div class="field">
+                                <label class="label">Input Letters</label>
+                                <div class="control">
+                                    <input id="letters-inp" class="input" type="text" placeholder="abcdefg" minlength=3
+                                        maxlength=15>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label">Minimum Length to Consider</label>
+                                <div class="control">
+                                    <input id="minl" class="input" type="number" min="3" value="4">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label">Maximum Number of Results</label>
+                                <div class="control">
+                                    <input id="maxRes" class="input" type="number" min="3" value="4">
+                                </div>
+                            </div>
+                            <input class="button is-success" type="submit" value="Go">
+                            <input class="button is-danger" type="reset" value="Clear">
+                        </form>
+                    </div>
+                </div>
+                <div class="column content">
+                    <p class="subtitle">Result:</p>
+                    <div id="result-list">
+                        Results will appear here
+                    </div>
+                </div>
+        </section>
 
-        <div class="columns">
-            <div class="column" height=100%>
-                <div class="box">
-                    <form onsubmit="return bootNumbers(event)">
-                        <div class="field">
-                            <label class="label">Input Numbers (comma separated)</label>
-                            <div class="control">
-                                <input id="numbers-inp" class="input" type="text" placeholder="1,2,3,4,5,6" minlength=3
-                                    maxlength=15>
+        <section class="section content">
+            <h1 class="title">Numbers</h1>
+            <p class="subtitle">Enter your input numbers (separated by commas) and your target</p>
+
+            <div class="columns">
+                <div class="column" height=100%>
+                    <div class="box">
+                        <form onsubmit="return bootNumbers(event)">
+                            <div class="field">
+                                <label class="label">Input Numbers (comma separated)</label>
+                                <div class="control">
+                                    <input id="numbers-inp" class="input" type="text" placeholder="1,2,3,4,5,6"
+                                        minlength=3 maxlength=15>
+                                </div>
                             </div>
-                        </div>
-                        <div class="field">
-                            <label class="label">Target</label>
-                            <div class="control">
-                                <input id="numbers-target" class="input" type="number" min="1" max="999"
-                                    placeholder="123">
+                            <div class="field">
+                                <label class="label">Target</label>
+                                <div class="control">
+                                    <input id="numbers-target" class="input" type="number" min="1" max="999"
+                                        placeholder="123">
+                                </div>
                             </div>
-                        </div>
-                        <input class="button is-success" type="submit" value="Go">
-                        <input class="button is-danger" type="reset" value="Clear">
-                    </form>
+                            <input class="button is-success" type="submit" value="Go">
+                            <input class="button is-danger" type="reset" value="Clear">
+                        </form>
+                    </div>
                 </div>
-            </div>
-            <div class="column content">
-                <p class="subtitle">Result:</p>
-                <div id="numbers-result">
-                    The result will appear here
+                <div class="column content">
+                    <p class="subtitle">Result:</p>
+                    <div id="numbers-result">
+                        The result will appear here
+                    </div>
                 </div>
-            </div>
-    </section>
+        </section>
+    </div>
 
     <footer class="footer">
         <div class="content has-text-centered">
