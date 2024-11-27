@@ -2,3 +2,4 @@
 /pkg
 /Cargo.lock
 /public
+/node_modules
